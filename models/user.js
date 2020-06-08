@@ -27,8 +27,9 @@ let userSchema = new mongoose.Schema({
 })
 
 //TODO: Hash the passwords
+//This is a hook, a function that runs just before you save 
 userSchema.pre('save', function(done) {
-    //Make syre uts bew, as opposed to modified
+    //Make sure its new, as opposed to modified
     if ( this.isNew ) {
         this.password = bcrypt.hashSync(this.password, 12)
     }
@@ -37,7 +38,7 @@ userSchema.pre('save', function(done) {
 })
 
 // Make a JSON reprensentation of the user (for sending on the JWT payload)
-// We're deleing password bc we dont want to pass the token back to the user their own pw wjen the token can be seen by everyone 
+// We're deleing password bc we dont want to pass the token back to the user their own pw when the token can be seen by everyone 
 userSchema.set('toJSON', {
     transform: (doc, user) => {
         delete user.password

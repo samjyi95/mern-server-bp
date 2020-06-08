@@ -2,7 +2,7 @@ let router = require('express').Router()
 
 
 // NOTE: User should be logged in to access this route
-router.get('/profile', (req, res) => {
+router.get('/', (req, res) => {
     // The user is logged in, so req.user should have data!
     // TODO: Anything you want here!
   
